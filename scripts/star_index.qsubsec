@@ -1,0 +1,7 @@
+section('star_index', description='')
+outputs('logs/')
+options('V', 'cwd', 'notify')
+limits(h_rt='48:00:00', nodes=1)
+command('star2/STAR_2.7.10b/Linux_x86_64_static/STAR  --runMode genomeGenerate --genomeDir downloaded_data/star2/ --runThreadN 24 --genomeFastaFiles downloaded_data/gencode/GRCh38.primary_assembly.genome.fa  --sjdbGTFfile downloaded_data/gencode/gencode.v27.annotation.gtf', name='', test=True, log=True)
+
+

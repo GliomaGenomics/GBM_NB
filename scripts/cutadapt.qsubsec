@@ -1,0 +1,6 @@
+ 
+section('cutadapt-{FILE}', description='cutadapt file')
+limits(h_rt='4:00:00', h_vmem='2G')
+options('V', 'cwd', 'notify')
+outputs('logs/')
+command('cutadapt -a CTGTCTCTTATA -A CTGTCTCTTATA --minimum-length 30 --overlap 5 -q 10 -j0 -o {DIR}{FILE}_R1_001_cutadapt.fastq.gz -p {DIR}{FILE}_R2_001_cutadapt.fastq.gz {DIR}{FILE}_R1_001.fastq.gz {DIR}{FILE}_R2_001.fastq.gz', name='cutadapt', test=True, log=True)

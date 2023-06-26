@@ -1,0 +1,7 @@
+section('bamsplit', description='')
+outputs('logs/')
+options('V', 'cwd', 'notify', 'P omics')
+limits(h_rt='48:00:00', nodes=1)
+command('mkdir {DIR}/split_bams/ ; cd {DIR}/split_bams/ ; samtools split --threads 24 -f %*_%! ../Aligned.out.bam', name='', test=True, log=True)
+
+

@@ -1,0 +1,7 @@
+ 
+section('fastqc-{FILE}', description='fastqc file')
+options('V', 'cwd', 'notify')
+limits(h_rt='48:00:00', h_vmem='10G')
+outputs('logs/')
+#command('fastqc -t 20 {DIR}{FILE}_R1_001.fastq.gz {DIR}{FILE}_R2_001.fastq.gz', name='fastqc', test=True, log=True)
+command('fastqc -t 20 {DIR}{FILE}_R1_001_cutadapt.fastq.gz {DIR}{FILE}_R2_001_cutadapt.fastq.gz', name='fastqc', test=True, log=True)

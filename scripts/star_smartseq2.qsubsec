@@ -1,0 +1,6 @@
+section('star2_{SET}_{NAME}_{MIN}', description='')
+outputs('logs/')
+options('V', 'cwd', 'notify')
+limits(h_rt='48:00:00', nodes=1)
+command('cd data/{SET}/star_gfp_min{MIN}_minNmatch3/ ; ../../../star3/STAR_2.7.10b/Linux_x86_64_static/STAR --runThreadN 24  --outFilterMatchNmin 60 --outFilterScoreMinOverLread {MIN} --outFilterMatchNminOverLread {MIN} --outSAMattributes RG GX --quantMode TranscriptomeSAM --outSAMunmapped Within --quantTranscriptomeBan Singleend --genomeDir ../../../downloaded_data/star3/ --outSAMtype BAM Unsorted --readFilesCommand gunzip -c --twopassMode Basic --soloType SmartSeq --readFilesManifest {SET}_manifest.txt --soloUMIdedup Exact --soloStrand Unstranded --soloFeatures Gene GeneFull SJ --soloMultiMappers Unique --soloOutFileNames output/ {SET}_genes.tsv {SET}_barcodes.tsv {SET}_matrix.mtx ', name='star', test=True, log=True)
+

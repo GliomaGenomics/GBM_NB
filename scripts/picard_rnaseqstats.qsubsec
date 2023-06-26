@@ -1,0 +1,13 @@
+ 
+section('picard_rnaseqstats-{FILE}', description='{FILE}')
+limits(h_rt='24:00:00', h_vmem='20G')
+options('V', 'cwd', 'notify', 'P omics')
+outputs('logs/')
+command('samtools sort {DIR}/{FILE} -o {DIR}/{FILE}_sorted.bam', name='sort', test=True, log=True)
+command('samtools index {DIR}/{FILE}_sorted.bam', name='sort', test=True, log=True)
+command("samtools view -H {DIR}/{FILE}_sorted.bam | sed 's,^@RG.*,&\tSM:None\tLB:None\tPL:Illumina,g' |  samtools reheader - {DIR}/{FILE}_sorted.bam > {DIR}/{FILE}_sorted_rg.bam", name='sort', test=True, log=True)
+command("samtools flagstat {DIR}/{FILE}_sorted_rg.bam > {DIR}/{FILE}_sorted_rg_flagstat.txt", name='sort', test=True, log=True)
+command("samtools view -q255 -bh {DIR}/{FILE}_sorted_rg.bam > {DIR}/{FILE}_sorted_rg_unique.bam", name='sort', test=True, log=True)
+command("samtools flagstat {DIR}/{FILE}_sorted_rg_unique.bam > {DIR}/{FILE}_sorted_rg_unique_flagstat.txt", name='sort', test=True, log=True)
+command('module load java/8u172 ; java -jar ~/picard.jar CollectRnaSeqMetrics I={DIR}/{FILE}_sorted_rg_unique.bam STRAND=NONE O={DIR}/{FILE}_sorted_rg_unique_stats.txt REF_FLAT=downloaded_data/gencode/gencode.v27.annotation.ref_flat.txt RIBOSOMAL_INTERVALS=downloaded_data/gencode/gencode.v27.annotation_rib.interval_list', name='mardup', test=True, log=True)
+command('samtools index {DIR}/{FILE}_sorted_rg_unique.bam', name='index', test=True, log=True)

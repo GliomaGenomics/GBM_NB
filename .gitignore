@@ -1,0 +1,13 @@
+qsubsec/
+env/
+bin/
+downloaded_data/
+logs/
+star3/*
+data/Encrypted
+data/*/fastq
+data/*/*/split_bams
+data/*/*/_STAR*
+data/*/*/Aligned*
+data/scripts/
+gtfToGenePred
